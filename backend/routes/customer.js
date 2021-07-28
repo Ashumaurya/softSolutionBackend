@@ -23,4 +23,5 @@ router.post(
   }),
   createCustomer
 );
+router.get("");
 module.exports = router;

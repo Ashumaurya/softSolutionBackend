@@ -21,9 +21,23 @@ const createCustomer = (req, res) => {
 };
 
 const getCustomer = (req, res) => {
-  res.json({
-    message: " this is a customer",
+  Customer.find()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => res.send(err));
+};
+
+const getCustomerById = (req, res, next, id) => {
+  Customer.findById(id).exec((err, data) => {
+    if (err || !data) {
+      return res.status(400).json({
+        error: "No user found in DB",
+      });
+    }
+    req.profile = user;
+    next();
   });
 };
 
-module.exports = { createCustomer, getCustomer };
+module.exports = { createCustomer, getCustomer, getCustomerById };
