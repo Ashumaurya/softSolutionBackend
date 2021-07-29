@@ -1,8 +1,13 @@
 var mongoose = require("mongoose");
-const { ObjectId } = mongoose.schema;
+const { ObjectId } = mongoose.Schema;
 
 var transactionSchema = mongoose.Schema(
   {
+    customer: {
+      type: ObjectId,
+      ref: "Customer",
+      required: true,
+    },
     ammount: {
       type: Number,
       required: true,
@@ -15,14 +20,9 @@ var transactionSchema = mongoose.Schema(
       required: true,
     },
     transactionType: {
-      type: String,
+      type: String, //paid or recieved
       required: true,
       trim: true,
-    },
-    customer: {
-      type: ObjectId,
-      ref: "Customer",
-      required: true,
     },
   },
   { timestamps: true }
