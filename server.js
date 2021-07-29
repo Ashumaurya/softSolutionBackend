@@ -7,6 +7,7 @@ var cors = require("cors");
 var customerRoutes = require("./backend/routes/customer");
 var divisionRoutes = require("./backend/routes/division");
 var transactionRoutes = require("./backend/routes/transaction");
+var path = require("path");
 //Database Connection
 mongoose
   .connect("mongodb://localhost:27017/customer", {
@@ -28,8 +29,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", customerRoutes);
 app.use("/api", divisionRoutes);
 app.use("/api", transactionRoutes);
-
-//Frontend Routes
+app.use(express.static("public"));
+//Frontend Routes\
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "./public/index.html"));
+});
 
 // server Connection
 app.listen(port, () => {

@@ -22,6 +22,7 @@ var transactionSchema = mongoose.Schema(
     customer: {
       type: ObjectId,
       ref: "Customer",
+      required: true,
     },
   },
   { timestamps: true }
