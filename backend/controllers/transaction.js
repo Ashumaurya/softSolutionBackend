@@ -4,6 +4,7 @@ const Customer = require("../models/customer");
 const createTransaction = (req, res) => {
   const errors = validationResult(req);
   const transaction = new Transaction(req.body);
+  let transactionList = [];
   if (!errors.isEmpty()) {
     return res.status(400).json({
       error: errors.array()[0].msg,
@@ -19,9 +20,24 @@ const createTransaction = (req, res) => {
     Customer.findById(data.customer)
       .then((customerData) => {
         customerData.transaction.push(data);
-        console.log(customerData.transaction);
+        transactionList = customerData.transaction;
+        console.log(transactionList);
+        Customer.findByIdAndUpdate(
+          data.customer,
+          {
+            $set: { transaction: transactionList },
+          },
+          { new: true },
+          (err, model) => {
+            if (err) {
+              console.log(err);
+            }
+            console.log(model);
+          }
+        );
       })
       .catch((err) => console.log(err));
+
     res.json(data);
   });
   console.log(req.body);
