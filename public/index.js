@@ -38,7 +38,7 @@ function getDivisionData() {
       data.data.map((arr) => {
         divisions.push(arr);
       });
-      console.log(divisions);
+      // console.log(divisions);
       let divisionById = document.getElementById("division-form");
       let getTransactionByDivision = document.getElementById("get-division");
       // console.log(divisionById, getTransactionByDivision);
@@ -121,7 +121,35 @@ function handleGetTransactionByDivisionID(event) {
     console.log(val);
     axios
       .get(`api/transactionbydivision/divisionID=${val.divisionId}`)
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        var table = document
+          .getElementById("myTable")
+          .getElementsByTagName("tbody")[0];
+        const newdata = data.data;
+        console.log(newdata);
+        data.data.map((transactions) => {
+          console.log(transactions);
+          var newRow = table.insertRow(table.rows.length);
+          var TransactionId = newRow.insertCell();
+
+          var Name = newRow.insertCell();
+
+          var Division = newRow.insertCell();
+          var Ammount = newRow.insertCell();
+          var transactionType = newRow.insertCell();
+          var text = document.createTextNode(transactions._id);
+          TransactionId.appendChild(text);
+          var text = document.createTextNode(transactions.customer);
+          Name.appendChild(text);
+          var text = document.createTextNode(transactions.division);
+          Division.appendChild(text);
+          var text = document.createTextNode(transactions.ammount);
+          Ammount.appendChild(text);
+          var text = document.createTextNode(transactions.transactionType);
+          transactionType.appendChild(text);
+        });
+      })
       .catch((err) => console.log(err));
   });
 }
