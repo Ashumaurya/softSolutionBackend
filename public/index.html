@@ -82,21 +82,19 @@
                     <input type="number" class="form-control" id="transaction-amouont" required = "true" name="ammount">
                   </div> 
                     <div class="mb-3">
-                        <label for="phone" class="form-label control-label">Divison</label>
-                        <select class="form-select" aria-label="Default select example" required = "true" name="division">
-                            <option selected>Open this select menu</option>
-                            <option value="RCMPL">RCMPL</option>
-                            <option value="ABC">ABC</option>
-                            <option value="XYZ">XYZ</option>
+                        <label for="Transactio-division" class="form-label control-label">Divison</label>
+                        <select class="form-select" aria-label="Default select example" id ="division-form" required = "true" name="division">
+                            <option selected>Open this select menu</option>  
                           </select>
                      </div>
 
                      <div class="mb-3">
                         <label for="Adress" class="form-label control-label">Transaction Type</label>
-                        <select class="form-select" aria-label="Default select example" required = "true" name="transactionType">
+                        <select class="form-select" aria-label="Default select example"  required = "true" name="transactionType">
                             <option selected>Open this select menu</option>
                             <option value="Recieved">Recieved</option>
                             <option value="Paid">Paid</option>
+
                           </select>
                      </div>
                      <div class="d-flex justify-content-end">
@@ -121,18 +119,14 @@
                 </div>
 
 <!-- *******************************************************Get transaction by division******************************************************************************** -->
-                 <div class="card my-4">
-
-                
+                 <div class="card my-4"> 
                 <h5 class="d-flex justify-content-center card-header">Get transaction By Division</h5>
                 <form class="p-2 division-transactions">
                   <div class="mb-3 col">
-                      <label for="firstName" class="form-label control-label">Select Division</label>
-                      <select class="form-select" aria-label="Default select example" required = "true" name = "division">
+                      <label for="get-transaction-by-id" class="form-label control-label">Select Division</label>
+                      <select class="form-select" aria-label="Default select example" id ="get-division" required = "true" name = "divisionId">
                         <option selected>Open this select menu</option>
-                        <option value="RCMPL">RCMPL</option>
-                        <option value="ABC">ABC</option>
-                        <option value="XYZ">XYZ</option>
+                        
                       </select>
                   </div>
                   <div class="d-flex justify-content-end">

@@ -10,5 +10,10 @@ const createDivision = (req, res) => {
     res.json(data);
   });
 };
+const getDivisions = (req, res) => {
+  Division.find()
+    .then((data) => res.send(data))
+    .catch((err) => res.send(err));
+};
 
-module.exports = { createDivision };
+module.exports = { createDivision, getDivisions };

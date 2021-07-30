@@ -2,6 +2,7 @@ const Transaction = require("../models/transaction");
 const { validationResult } = require("express-validator");
 const Customer = require("../models/customer");
 const createTransaction = (req, res) => {
+  console.log(req.body);
   const errors = validationResult(req);
   const transaction = new Transaction(req.body);
   let transactionList = [];
@@ -40,7 +41,27 @@ const createTransaction = (req, res) => {
 
     res.json(data);
   });
-  console.log(req.body);
+  // console.log(req.body);
 };
 
-module.exports = { createTransaction };
+const getTransactionsBydivisionID = (req, res, next, id) => {
+  Transaction.find({ division: id }).exec((err, data) => {
+    if (err || !data) {
+      return res.status(400).json({
+        err: "No user Data find in Database",
+      });
+    }
+    console.log(data);
+    req.transactionByid = data;
+    next();
+  });
+};
+const getTransactionsByDivision = (req, res) => {
+  return res.json(req.transactionByid);
+};
+
+module.exports = {
+  createTransaction,
+  getTransactionsBydivisionID,
+  getTransactionsByDivision,
+};

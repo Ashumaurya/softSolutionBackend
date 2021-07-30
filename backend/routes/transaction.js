@@ -1,9 +1,12 @@
 var express = require("express");
 var router = express.Router();
-const { createTransaction } = require("../controllers/transaction");
+const {
+  createTransaction,
+  getTransactionsBydivisionID,
+  getTransactionsByDivision,
+} = require("../controllers/transaction");
 var { check } = require("express-validator");
 const Customer = require("../models/customer");
-
 router.post(
   "/createtransaction",
   //   check("transactionType").custom((value) => {
@@ -21,6 +24,13 @@ router.post(
 
   createTransaction
 );
+
+router.param("DivisionId", getTransactionsBydivisionID);
+router.get(
+  "/transactionbydivision/divisionID=:DivisionId",
+  getTransactionsByDivision
+);
+
 module.exports = router;
 
 // example
