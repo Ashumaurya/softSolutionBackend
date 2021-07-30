@@ -4,6 +4,7 @@ const {
   createTransaction,
   getTransactionsBydivisionID,
   getTransactionsByDivision,
+  getTransactionsBydivisionIDExample,
 } = require("../controllers/transaction");
 var { check } = require("express-validator");
 const Customer = require("../models/customer");
@@ -25,7 +26,7 @@ router.post(
   createTransaction
 );
 
-router.param("DivisionId", getTransactionsBydivisionID);
+router.param("DivisionId", getTransactionsBydivisionIDExample);
 router.get(
   "/transactionbydivision/divisionID=:DivisionId",
   getTransactionsByDivision
