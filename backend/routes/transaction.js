@@ -5,6 +5,8 @@ const {
   getTransactionsBydivisionID,
   getTransactionsByDivision,
   getTransactionsBydivisionIDExample,
+  getTransactionDetailByCustomerId,
+  getTransactionByCustomer,
 } = require("../controllers/transaction");
 var { check } = require("express-validator");
 const Customer = require("../models/customer");
@@ -30,6 +32,11 @@ router.param("DivisionId", getTransactionsBydivisionIDExample);
 router.get(
   "/transactionbydivision/divisionID=:DivisionId",
   getTransactionsByDivision
+);
+router.param("CustomerId", getTransactionDetailByCustomerId);
+router.get(
+  "/transactionbycustomer/customerID=:CustomerId",
+  getTransactionByCustomer
 );
 
 module.exports = router;
