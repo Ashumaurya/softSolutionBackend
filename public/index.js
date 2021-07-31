@@ -122,14 +122,56 @@ function handleGetTransactionByDivisionID(event) {
     axios
       .get(`api/transactionbydivision/divisionID=${val.divisionId}`)
       .then((data) => {
+        // console.log(data);
+        var table = document
+          .getElementById("myTable")
+          .getElementsByTagName("tbody")[0];
+        table.innerHTML = null;
+        // console.log(tableData);
+        const newdata = data.data;
+        //console.log(newdata);
+        data.data.map((transactions) => {
+          //  console.log(transactions);
+          var newRow = table.insertRow(table.rows.length);
+          var TransactionId = newRow.insertCell();
+
+          var Name = newRow.insertCell();
+
+          var Division = newRow.insertCell();
+          var Ammount = newRow.insertCell();
+          var transactionType = newRow.insertCell();
+          var text = document.createTextNode(transactions._id);
+          TransactionId.appendChild(text);
+          var text = document.createTextNode(transactions.customer);
+          Name.appendChild(text);
+          var text = document.createTextNode(transactions.division);
+          Division.appendChild(text);
+          var text = document.createTextNode(transactions.ammount);
+          Ammount.appendChild(text);
+          var text = document.createTextNode(transactions.transactionType);
+          transactionType.appendChild(text);
+        });
+      })
+      .catch((err) => console.log(err));
+  });
+}
+
+function handleGetTransactionsByCustommerID(event) {
+  return FormSubmit(event).then((val) => {
+    console.log(val.customerID);
+    axios
+      .get(`api/transactionbycustomer/customerID=${val.customerID}`)
+      .then((data) => {
         console.log(data);
         var table = document
           .getElementById("myTable")
           .getElementsByTagName("tbody")[0];
+        table.innerHTML = null;
+        // console.log(tableData);
         const newdata = data.data;
-        console.log(newdata);
+        //console.log(newdata);
         data.data.map((transactions) => {
-          console.log(transactions);
+          //  console.log(transactions);
           var newRow = table.insertRow(table.rows.length);
           var TransactionId = newRow.insertCell();
 
@@ -168,9 +210,10 @@ divisonForm[0].addEventListener("submit", handleAddDivision);
 
 //Get customerByID
 const customerByIdForm = document.getElementsByClassName("customer-by-id");
-customerByIdForm[0].addEventListener("submit", function () {
-  console.log("clicked");
-});
+customerByIdForm[0].addEventListener(
+  "submit",
+  handleGetTransactionsByCustommerID
+);
 
 //Get transaction by division
 
